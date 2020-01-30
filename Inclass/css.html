@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS-Inclass1</title>
+  <meta charset="utf-8">
+<style>
+
+.grid-container1 {
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: 20% auto 20%;
+  grid-template-rows: 3em 15em 2em;
+}
+.grid-containe2 {
+  display: grid;
+  grid-gap: 2px;
+  grid-template-areas: 
+  '. . hr hr hr .'
+  'nav nav mn mn mn as'
+  'ft ft ft ft ft ft';
+  grid-template-rows: 3em 15em 2em;
+  grid-template-columns: 10% 10% auto auto auto auto;
+}
+div, nav, article, aside, footer {
+  text-align: center;
+  font-size: 1.5em;
+}
+.nav, nav {
+  background-color: green;
+}
+.article, article {
+  background-color: lightblue;
+}
+.aside, aside {
+  background-color: beige;
+}
+.header, .footer, footer {
+  background:  #2196F3;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+  <div class='grid-container1'>
+      <div class="header" style="grid-column-start: 2;">Header<br>Template Columns</div>
+      <div class="nav" style="grid-column-start: 1;">Nav</div>
+      <div class="article">Main</div>
+      <div class="aside">Aside</div>
+      <div class="footer" style="grid-column-start: 1; grid-column-end: 4;">Footer</div>
+  </div><br><br>
+  
+  <div class='grid-containe2'>
+    <header class='header' style="grid-area: hr;">Header<br>Template Areas</header>
+    <nav style="grid-area: nav;">Nav</nav>
+    <article style="grid-area: mn;">Main</article>
+    <aside style="grid-area: as;">Aside</aside>
+    <footer style="grid-area: ft;">Footer</footer>
+  </div>  
+</body>
+</html>

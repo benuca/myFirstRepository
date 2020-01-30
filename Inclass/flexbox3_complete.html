@@ -1,0 +1,47 @@
+<!doctype html>
+<title>Flexbox-1</title>
+<style>
+  body {
+    height: 100vh;
+    text-align: center;
+    box-sizing: border-box;
+    font-weight: bold;
+  }
+  #main {
+    display: flex;
+  } 
+  #main > nav {
+    flex: 0 0 10%;
+    order: 1;
+  }
+  #main > article {
+    flex: 1;
+    order: 2;
+  }
+  #main > aside {
+    flex: 0 0 20%;
+    order: 3;
+  }
+  header, footer {
+    background:  #2196F3;
+    font-size: 1.2em;
+  }
+  header, footer, article, nav, aside {
+    border: 1px solid black;
+    padding: 1em;       
+  } 
+</style>
+<body>
+  <header>Header</header>
+  <div id="main">
+      <nav>Nav
+          <hr>
+          <p><a href='xx'>Item 1</a></p>
+          <p><a href='xx'>Item 2</a></p>
+          <p><a href='xx'>Item 3</a></p>
+      </nav>
+      <article>Article</article>
+      <aside>Aside</aside> 
+  </div>
+  <footer>Footer</footer>
+</body>
