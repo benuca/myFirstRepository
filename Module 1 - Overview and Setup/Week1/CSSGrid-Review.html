@@ -1,0 +1,332 @@
+﻿<!DOCTYPE HTML>
+<!-- CSS Grids & FlexBox / Review-->
+<html>
+<head>
+	<title>CSS Grid / FlexBox Review</title>
+	<meta charset="utf-8">
+
+	<link href="../css/review.css" rel="stylesheet">
+  <link href="../images/web.png" rel="icon">
+	
+	<style>
+		#gridTable table { width: 95%; }
+		#gridTable th { padding: 0px 10px 0px 15px;}
+		#gridTable td { text-align: left;}
+		
+		.exGrid table { width: 70%; border: thin solid black; border-collapse: collapse;}
+		.exGrid td { border: thin solid black; background: silver; height: 15px;}
+		.exGrid td:nth-child(1) { width: 10%; }
+		.exGrid td:nth-child(2) { width: 40%; }
+		.exGrid td:nth-child(3) { width: 20%; }
+		
+		pre { color: black; font-weight: bold; }
+		.flexContainer {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 0 auto;
+			color: navy;
+		}
+		.flex1 { 
+			flex: 1; 
+			font-weight: bold;
+		}
+		.flex2 { flex: 5; }
+		
+		.flexDefs { display: flex; width: 95%; flex-wrap: wrap;}
+		.flexDefProp { flex: 1; font-weight: bold; font-style: italic; color: navy; margin-left: 15px;}
+		.flexDefOpts { flex: 5; padding-bottom: 7px;}
+
+		#pos td { border-bottom: thin solid black;}
+		#pos th { text-align: center; color: black; }
+	</style>
+	
+</head>
+<body class="site">
+	<header class="header headfoot">
+		CSS Grids &amp; FlexBox
+	</header>
+	
+	<section class="content">
+		<table>
+			<tr><td class="subHead">Review...</td>
+					<td><img src="../images/cssGrid.png" width="100px"><img src="../images/flexBox.png" width="100px"></td></tr>
+		</table>
+		<ul id="class">
+			<li>
+				<span class="subHead">CSS Grids</span>
+				<section class="blue">CSS Grids use a grid-based layout system (rows and columns) that allows the user to easily create a fluid design for their web site which is useful for adapting to many different contexts. This layout system uses CSS instead of traditional HTML positioning techniques like floating. It also allows layering of items on the grid thus a two-dimensional layout unlike flexbox which we covered earlier in the term which is only one-dimensional. CSS Grids allows use to size and position using CSS inside our grid with no changes to HTML.
+				<br>
+				<div class="line">CSS Grid Terminology:</div>
+					<table id="gridTable">
+						<tr>
+							<th>display: grid;</th>
+							<td>Creates the grid container. Similar to flexbox, all items in the grid container become grid items.</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+<pre>
+	.gridContainer { display: grid; }
+</pre> 
+							</td>
+						</tr>
+
+						<tr>
+							<th>grid-template-columns</th>
+							<td>Defines the number and size of grid columns. Example #1 below defines 2 colums with 25% and 75% column sizes respectively. Example #2 uses the <em>fr</em> unit. <strong>Fr</strong> is a fractional unit where 1fr is for 1 part of the available space so the example would split the space into 7 total fractions spaced as specified. </td>
+						</tr>
+						<tr>
+							<td>
+<pre>
+	<span class="comment">* Example #1 */</span>
+	.gridContainer { 
+	 display: grid; 
+	 grid-template-columns: 25% 75%;}
+</pre> 
+							</td>
+							<td>
+<pre>
+	<span class="comment">* Example #2 */</span>
+	.gridContainer { 
+	 display: grid; 
+	 grid-template-columns: 1fr 4fr 2fr;}
+</pre> 
+							</td>
+						</tr>	
+						<tr>
+							<td colspan="2">
+								<div class="line">Example #2 layout:</div>
+								<table class="exGrid">
+									<tr><td></td><td></td><td></td></tr>
+								</table><br>
+							</td>
+						</tr>
+
+						<tr>
+							<th>grid-template-rows</th>
+							<td>Defines the number and size of grid rows. Example #1 below uses the keyword <em>auto</em>. This sizes the rows automatically based on the container size. In other words, it bases the number and size of rows on how many are actually created and how much data is in each row. Example #2, uses the <em>repeat</em> notation to set up each column to contain 2 fractions (rows).</td>
+						</tr>
+						<tr>
+							<td>
+<pre>
+	<span class="comment">* Example #1 */</span>
+	.gridContainer { 
+	 display: grid; 
+	 grid-template-columns: 25% 75%; 
+	 grid-template-rows: auto;}
+</pre> 
+							</td>
+							<td>
+<pre>
+	<span class="comment">* Example #2 */</span>
+	.gridContainer { 
+	 display: grid; 
+	 grid-template-columns: 1fr 4fr 2fr; 
+	 grid-template-rows: repeat(3, 2fr);}
+</pre> 
+							</td>
+						</tr>	
+						<tr>
+							<td colspan="2">
+								<div class="line">Example #2 layout:</div>
+								<table class="exGrid">
+									<tr><td><br><br></td><td><br><br></td><td><br><br></td></tr>
+								</table><br>
+							</td>
+						</tr>		
+
+						<tr>
+							<th>grid-template-areas</th>
+							<td>Defines a grid item's size and location/placement. It allows you to map out your grid. <em>(This is actually the shorthand property for grid-row-start, grid-column-start, grid-row-end and grid-column-end.)</em>. Notice in Example #1 below, we have a grid that is 2x3 with the header and footer taking up all columns and reference and content split into 2 columns. With <em>grid-template-rows</em> being set to <em>auto</em>, all areas will grow based on content entered.							
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+<pre>
+	<span class="comment">* Example #1 */</span>
+	.gridContainer { 
+	 display: grid; 
+	 grid-template-columns: 25% 75%; 
+	 grid-template-rows: auto;
+	 grid-template-areas: 
+	 	"header header"
+		"reference content"
+		"footer footer";}
+	.header {grid-area: header; 
+		background: blue;}
+	.reference {grid-area: reference; 
+		background: red; }
+	.content {grid-area: content; 
+		background: green; }
+	.footer grid-area: footer; 
+		background: yellow; }
+</pre> 
+							</td>
+
+							<td>
+<pre>
+	<span class="comment">* Example #2 */</span>
+	.gridContainer { 
+	 display: grid; 
+	 grid-template-columns: 1fr 4fr 2fr; 
+	 grid-template-rows: repeat(3, 2fr); 
+	 grid-template-areas:
+		"word definitions example;}
+	.word {grid-area: word;}
+	.def {grid-area: definitions;}
+	.ex {grid-area: example;}
+</pre> 
+							</td>
+						</tr>	
+
+						<tr>
+							<td colspan="2">
+								<div class="line">Example #1 layout:</div>
+								<table class="exGrid">
+									<tr><td colspan="2" style="background: blue;"></td></tr>
+									<tr><td style="background: red;"></td><td style="background: green;"></td></tr>
+									<tr><td colspan="2" style="background: yellow;"></td></tr>
+								</table><br>
+							</td>
+						</tr>		
+						<tr>
+							<td colspan="2">
+								<div class="line">Example #2 layout:</div>
+								<table class="exGrid">
+									<tr><td><br>word area<br></td><td><br>definitions area<br></td><td><br>example area<br></td></tr>
+								</table><br>
+							</td>
+						</tr>						
+
+						<tr>
+							<th>grid-gap</th>
+							<td>Creates space between columns and/or rows. If <em>grid-gap</em> is used, it will put the gap (or gutter) between both columns and rows. You can also use <em>grid-column-gap</em> for gaps between columns only or <em>grid-row-gap</em> for gaps between rows only. Gaps can be a length or a percentage, but you cannot use the <em>fr</em> unit.</td>
+						</tr>						
+					</table>
+				</section>
+			</li><br>
+			<li>
+				<img src="../images/url.png" width="25px"><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids" target="_blank" class="line">CSS Grid overview from MDN Web Docs</a>
+			</li>
+<br>
+<hr class="divider">
+<br>
+			<li>
+				<span class="subHead">Flexbox</span>
+				<section>
+					<span class="blue"><strong>Flexbox</strong> provides an efficient way to layout, align and distribute items in a specified container. Flexbox is more appropriate for smaller-scaled layouts. CSSGrid, which we will be looking at later in the term, is intended for larger-scaled layouts. Flexbox and CSSGrid are alternatives to the traditional HTML positioning techniques.<br><br>
+					Basically, the flexbox premise is a container with items placed within that container in a certain order and a specified alignment. Imagine you want to hang some pictures on a section of a wall. The wall section would become your <em>flex-container</em> and each picture would become a <em>flex-item</em>. The final picture layout on the wall section is determined by how big is the wall section, how many pictures  are to be put on the wall section, and how much space do you want each picture to take up. You also need to decide if the pictures are going to be hung horizontally or vertically.<br>
+					<em>NOTE: We will be doing more with flexbox when we cover Media Queries later in the term.</em></span><br><br>
+					<span class="subHead">Container Properties</span>
+					<section class="flexDefs">
+						<div class="flexDefProp">display: </div>
+						<div class="flexDefOpts">flex<br><span class="comment">/* or inline-flex */</span></div>
+					</section>
+					<section class="flexDefs">
+						<div class="flexDefProp">flex-direction: </div>
+						<div class="flexDefOpts">row | row-reverse | column | column-reverse<br>
+							<span class="comment">/* vertical or horizontal */</span></div>
+					</section>		
+					<section class="flexDefs">
+						<div class="flexDefProp">flex-wrap: </div>
+						<div class="flexDefOpts">nowrap | wrap | wrap-reverse<br>
+							<span class="comment">/* Items will by default try to fit on one line but this can be changed to include wrapping if needed */</span></div>
+					</section>							
+					<section class="flexDefs">
+						<div class="flexDefProp">flex-flow: </div>
+						<div class="flexDefOpts">flex-direction || flex-wrap<br>
+							<span class="comment">/* Shorthand for flex-direction and flex-wrap (default is row nowrap) */</span></div>
+					</section>						
+					<section class="flexDefs">
+						<div class="flexDefProp">justify-content: </div>
+						<div class="flexDefOpts">flex-start | flex-end | center | space-between | space-around | space-evenly<br>
+							<span class="comment">/* Alignment along the main axis */</span></div>
+					</section>		
+					<section class="flexDefs">
+						<div class="flexDefProp">align-items: </div>
+						<div class="flexDefOpts">flex-start | flex-end | center | baseline | stretch<br>
+							<span class="comment">/* Alignment along the cross axis */</span></div>
+					</section>	
+					<hr>
+					<span class="subHead">Item Properties</span>
+					<section class="flexDefs">
+						<div class="flexDefProp">flex: </div>
+						<div class="flexDefOpts">&lt;number&gt; &nbsp;&nbsp; &lt;number&gt; &nbsp;&nbsp; &lt;number&gt; | auto<br>
+							<span class="comment">/* Shorthand for <em>flex-grow, flex-shrink,</em> and <em>flex-basis which can be set separately.</em><br><em>flex-grow</em> (default is 0): indicates ability to grow; if set to 1 for all flex-items, the space will be distributed equally to all children <br><em>flex-shrink</em> (optional/default is 1): indicates if flex-item can shrink if necessary<br><em>flex-basis</em> (default is <em>auto</em>): defines size of item before extra space is distributed; <em>auto</em> based on current height and width; <em>content</em> based on items content (not well supported) */</span></div>
+					</section>
+					<section class="flexDefs">
+						<div class="flexDefProp">align-self: </div>
+						<div class="flexDefOpts">auto | flex-start | flex-end | center | baseline | stretch<br>
+							<span class="comment">/* Overrides default alignment for an individual item */</span></div>
+					</section>
+					<hr>
+<!-- Flexbox Example 01 -->
+					<span class="line">Flexbox Example</span><br>
+					<div class="blue">In this simple example, notice that the <em>flex-container (.wall)</em> must have the <em>display</em> property set to <em>flex</em> (or inline-flex). All <em>flex-items</em> must be inside the flex-container. For each <em>flex-item (.picture#)</em>, the <em>flex</em> property (<em>flex-grow</em> option only) is set how large this item can grow. For example, based on the number of <em>flex-items</em> and their sizes, this <em>container (.wall)</em> would split the width of the screen into 7 (1 + 4 + 2) sections. <em>.picture1</em> only takes up 1 section whereas <em>.picture2</em> takes up 4 sections and <em>.picture3</em> takes up 2 sections. NOTE: Borders were added for visual clarity.</div>
+					<div>
+<pre>
+&lt;head&gt;
+&lt;style&gt;
+ .wall { display: flex; }
+ .picCommon { padding: 15px; border: thin solid black;}
+ .picture1 { flex: 1;}
+ .picture2 { flex: 4;}	
+ .picture3 { flex: 2;}		
+ img { width: 150px; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;section class="wall"&gt;
+  &lt;div class="picture1 picCommon"&gt;&lt;img src="../../images/canada.png"&gt;&lt;/div&gt;
+  &lt;div class="picture2 picCommon"&gt;&lt;img src="../../images/canada.png"&gt;&lt;/div&gt;
+  &lt;div class="picture3 picCommon"&gt;&lt;img src="../../images/canada.png"&gt;&lt;/div&gt;
+ &lt;/section&gt;
+&lt;/body&gt;	
+</pre>		
+						<img src="../images/flexbox01.png" width="95%">
+					</div>
+<!-- Flexbox Example 02 -->
+					<hr>
+					<span class="line">Change 1</span><br>
+					<div class="blue">By adding <em>flex-flow: column nowrap;</em> to the container, notice the difference in appearance.</div>
+					<div>
+<pre>
+&lt;style&gt;
+ .wall { display: flex; flex-flow: column nowrap;}
+ .picCommon { padding: 15px; border: thin solid black;}
+ .picture1 { flex: 1;}
+ .picture2 { flex: 4;}	
+ .picture3 { flex: 2;}		
+ img { width: 150px; }
+&lt;/style&gt;
+
+</pre>		
+						<img src="../images/flexbox02.png" width="10%">
+					</div>
+					
+<!-- Flexbox Example 03 -->
+					<hr>
+					<span class="line">Change 2</span><br>
+					<div class="blue">Return to horizontal alignment <em>flex-flow: row nowrap;</em>, change width of images to 20% which will make each picture a different size (since the individual space is different), and then add <em>align-self:</em> for each picture item.</div>
+					<div>
+<pre>
+&lt;style&gt;
+ .wall { display: flex; flex-flow: row nowrap;}
+ .picCommon { padding: 15px; border: thin solid black;}
+ .picture1 { flex: 1; align-self: flex-start;}
+ .picture2 { flex: 4; align-self: center;}	
+ .picture3 { flex: 2; align-self: flex-end;}		
+ img { width: 20%; }
+&lt;/style&gt;
+
+</pre>		
+						<img src="../images/flexbox03.png" width="95%">
+					</div>					
+				</section>			
+			</li>
+		</ul>
+		<div class="owner"></div>
+	</section>
+
+</body>
+</html>
